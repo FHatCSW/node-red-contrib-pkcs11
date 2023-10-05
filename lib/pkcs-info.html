@@ -1,0 +1,38 @@
+<script type="text/javascript">
+    RED.nodes.registerType('p11-info', {
+        category: 'PKCS#11',
+        color: "rgb(95, 97, 255)",
+        defaults: {
+            name: { value: "" },
+            pkcs11Config: {
+                type: "pkcs11-config",
+                value: "",
+                required: true
+            },
+        },
+        inputs: 1,
+        outputs: 1,
+        label: function () {
+            return this.name || "get-pkcs11-info-2";
+        },
+        oneditprepare: function () {
+                var node = this;
+
+
+        },
+    });
+</script>
+
+<!-- Content of the configuration dialog -->
+<script type="text/html" data-template-name="p11-info">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-pkcs11Config">
+            <i class="fa fa-tag"></i> PKCS#11 Configuration
+        </label>
+        <input type="text" style="width: 300px" id="node-input-pkcs11Config">
+    </div>
+</script>

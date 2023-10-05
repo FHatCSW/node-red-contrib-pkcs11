@@ -1,0 +1,42 @@
+<script type="text/javascript">
+    RED.nodes.registerType('p11-digest', {
+        category: 'PKCS#11',
+        color: "rgb(95, 97, 255)",
+        defaults: {
+            name: { value: "" },
+            pkcs11Config: {
+                type: "pkcs11-config",
+                value: "",
+                required: true
+            },
+            algorithm: { value: "sha1" } // Default algorithm
+        },
+        inputs: 1,
+        outputs: 1,
+        label: function () {
+            return this.name || "hash";
+        },
+    });
+</script>
+
+<script type="text/html" data-template-name="p11-digest">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+     <div class="form-row">
+        <label for="node-input-pkcs11Config">
+            <i class="fa fa-tag"></i> PKCS#11 Configuration
+        </label>
+        <input type="text" style="width: 300px" id="node-input-pkcs11Config">
+    </div>
+    <div class="form-row">
+        <label for="node-input-algorithm"><i class="fa fa-tag"></i> Hashing Algorithm</label>
+        <select id="node-input-algorithm">
+            <option value="SHA1">SHA-1</option>
+            <option value="SHA256">SHA-256</option>
+            <option value="SHA512">SHA-512</option>
+            <!-- Add more supported algorithms here -->
+        </select>
+    </div>
+</script>

@@ -1,0 +1,114 @@
+<script type="text/javascript">
+    RED.nodes.registerType('p11-generate-key-pair', {
+        category: 'PKCS#11',
+        color: "rgb(95, 97, 255)",
+        defaults: {
+            name: { value: "" },
+            pkcs11Config: {
+                type: "pkcs11-config",
+                value: "",
+                required: true
+            },
+            keyType: { value: "RSA" }, // Default to RSA
+            bitLength: { value: "2048" }, // Default RSA bit length
+            curveType: { value: "secp256r1" }, // Default ECC curve type
+            aesBitlength: {value: "256"},
+            publickeylabel: { value: "RSA_Public_Key" },
+            privatekeylabel: { value: "RSA_Private_Key" },
+        },
+        inputs: 1,
+        outputs: 1,
+        label: function () {
+            return this.name || "generate-key-pair";
+        },
+        oneditprepare: function () {
+            var node = this;
+
+            // Show or hide bit length and curve type options based on key type
+            var keyTypeSelect = $("#node-input-keyType");
+            var bitLengthRow = $(".node-input-bitLength-row");
+            var curveTypeRow = $(".node-input-curveType-row");
+            var aesbitLengthRow = $(".node-input-aesBitlength-row");
+            var publickeylabelRow = $(".node-input-publickeylabel-row");
+
+            keyTypeSelect.on("change", function () {
+                var selectedKeyType = $(this).val();
+                if (selectedKeyType === "RSA") {
+                    bitLengthRow.show();
+                    curveTypeRow.hide();
+                    aesbitLengthRow.hide();
+                    publickeylabelRow.show();
+                } else if (selectedKeyType === "ECC") {
+                    bitLengthRow.hide();
+                    curveTypeRow.show();
+                    aesbitLengthRow.hide();
+                    publickeylabelRow.show();
+                } else if (selectedKeyType === "AES") {
+                    bitLengthRow.hide();
+                    curveTypeRow.hide();
+                    aesbitLengthRow.show();
+                    publickeylabelRow.hide();
+                }
+            });
+
+            // Trigger the change event to initialize the UI state
+            keyTypeSelect.trigger("change");
+        },
+    });
+</script>
+
+<!-- Content of the configuration dialog -->
+<script type="text/html" data-template-name="p11-generate-key-pair">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-pkcs11Config">
+            <i class="fa fa-tag"></i> PKCS#11 Configuration
+        </label>
+        <input type="text" style="width: 300px" id="node-input-pkcs11Config">
+    </div>
+    <div class="form-row node-input-publickeylabel-row">
+        <label for="node-input-publickeylabel"><i class="fa fa-tag"></i> Public-Key Label</label>
+        <input type="text" id="node-input-publickeylabel" placeholder="Public_Key">
+    </div>
+    <div class="form-row node-input-privatekeylabel-row">
+        <label for="node-input-privatekeylabel"><i class="fa fa-tag"></i> Private-Key Label</label>
+        <input type="text" id="node-input-privatekeylabel" placeholder="Private_Key">
+    </div>
+    <div class="form-row">
+        <label for="node-input-keyType"><i class="fa fa-key"></i> Key Type</label>
+        <select id="node-input-keyType">
+            <option value="RSA">RSA</option>
+            <option value="ECC">ECC</option>
+            <option value="AES">AES</option>
+        </select>
+    </div>
+    <div class="form-row node-input-bitLength-row">
+        <label for="node-input-bitLength"><i class="fa fa-key"></i> RSA Bit Length</label>
+        <select id="node-input-bitLength">
+            <option value="2048">RSA-2048</option>
+            <option value="3072">RSA-3072</option>
+            <option value="4096">RSA-4096</option>
+            <option value="6144">RSA-6144</option>
+            <option value="8192">RSA-8192</option>
+        </select>
+    </div>
+    <div class="form-row node-input-curveType-row">
+        <label for="node-input-curveType"><i class="fa fa-key"></i> ECC Curve Type</label>
+        <select id="node-input-curveType">
+            <option value="secp256r1">secp256r1</option>
+            <option value="secp384r1">secp384r1</option>
+            <option value="secp521r1">secp521r1</option>
+        </select>
+    </div>
+    <div class="form-row node-input-aesBitlength-row">
+        <label for="node-input-aesBitlength"><i class="fa fa-key"></i> AES Bit Length</label>
+        <select id="node-input-aesBitlength">
+            <option value="128">AES-128</option>
+            <option value="192">AES-192</option>
+            <option value="256">AES-256</option>
+        </select>
+    </div>
+</script>
