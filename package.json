@@ -11,8 +11,7 @@
       "sign": "lib/sign.js",
       "verify": "lib/verify.js",
       "hash": "lib/hash.js",
-      "list-keys": "lib/list-keys.js",
-      "check-open-session": "lib/check-open-session.js"
+      "list-objects": "lib/list-objects.js"
     }
   },
   "author": "Florian Handke",

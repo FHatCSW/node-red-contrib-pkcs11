@@ -1,29 +1,29 @@
 <script type="text/javascript">
-    RED.nodes.registerType('check-open-session', {
+    RED.nodes.registerType('list-objects', {
         category: 'PKCS#11',
-        color: '#a6bbcf',
+        color: "rgb(95, 97, 255)",
         defaults: {
             name: { value: "" },
             pkcs11Config: {
                 type: "pkcs11-config",
                 value: "",
                 required: true
-            },
+            }
         },
         inputs: 1,
         outputs: 1,
-        icon: "function.png",
         label: function () {
-            return this.name || "check-open-session";
-        }
+            return this.name || "list-objects";
+        },
     });
 </script>
-<script type="text/html" data-template-name="check-open-session">
+
+<script type="text/html" data-template-name="list-objects">
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
-        <input type="text" id="node-input-name" placeholder="Name" data-i18n="[placeholder]check-open-session:name">
+        <input type="text" id="node-input-name" placeholder="Name">
     </div>
-        <div class="form-row">
+    <div class="form-row">
         <label for="node-input-pkcs11Config">
             <i class="fa fa-tag"></i> PKCS#11 Configuration
         </label>

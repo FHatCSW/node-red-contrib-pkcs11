@@ -10,6 +10,8 @@
                 required: true
             },
             keyLabel: { value: "Your_Private_Key_Label",
+            required: true },
+            pubkeyLabel: { value: "Your_Public_Key_Label",
             required: true } // Default private key label
         },
         inputs: 1,
@@ -34,5 +36,9 @@
     <div class="form-row">
         <label for="node-input-keyLabel"><i class="fa fa-tag"></i> Private Key Label</label>
         <input type="text" id="node-input-keyLabel" placeholder="Your_Private_Key_Label">
+    </div>
+    <div class="form-row">
+        <label for="node-input-pubkeyLabel"><i class="fa fa-tag"></i> Public Key Label</label>
+        <input type="text" id="node-input-pubkeyLabel" placeholder="Your_Public_Key_Label">
     </div>
 </script>
