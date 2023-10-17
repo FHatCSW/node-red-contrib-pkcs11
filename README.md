@@ -53,6 +53,7 @@ This package includes the following nodes:
 * **p11-verify**: Verifies the signature of a given payload with a key on the HSM
 * **p11-digest**: Use a hash function to produce a hash value
 * **p11-list-objects**: Lists all objects located on the HSM
+* **p11-store-cert**: Stores a X.509 certificate on a HSM
 
 ## Usage Examples
 
