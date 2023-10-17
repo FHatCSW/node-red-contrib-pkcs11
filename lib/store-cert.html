@@ -1,0 +1,63 @@
+<script type="text/javascript">
+    RED.nodes.registerType('p11-store-cert', {
+        category: 'PKCS#11',
+        color: "rgb(95, 97, 255)",
+        defaults: {
+            name: {value: ""},
+            pkcs11Config: {
+                type: "pkcs11-config",
+                value: "",
+                required: true
+            },
+            certificate_fieldType: {value: "msg"},
+            certificate: {value: "payload", required: true},
+            certificateLabel_fieldType: {value: "str"},
+            certificateLabel: {value: "private_key", required: true},
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "icons/2-file-export-solid.svg",
+        label: function () {
+            return this.name || "store-cert";
+        },
+        oneditprepare: function () {
+            $("#node-input-certificateLabel").typedInput({
+                default: 'msg',
+                types: ['msg', 'global', 'flow', 'str'],
+                typeField: $("#node-input-certificateLabel_fieldType")
+            });
+
+            $("#node-input-certificate").typedInput({
+                default: 'msg',
+                types: ['msg', 'global', 'flow', 'str'],
+                typeField: $("#node-input-certificate_fieldType")
+            });
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="p11-store-cert">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-pkcs11Config">
+            <i class="fa fa-gear"></i> PKCS#11 Configuration
+        </label>
+        <input type="text" style="width: 300px" id="node-input-pkcs11Config">
+    </div>
+
+
+    <div class="form-row">
+        <label for="node-input-certificate"><i class="fa fa-certificate"></i> Certificate</label>
+        <input type="text" id="node-input-certificate" style="width:250px;">
+        <input type="hidden" id="node-input-certificatefieldType">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-certificateLabel"><i class="fa fa-tag"></i> Certificate Label</label>
+        <input type="text" id="node-input-certificateLabel" style="width:250px;">
+        <input type="hidden" id="node-input-certificateLabel_fieldType">
+    </div>
+</script>

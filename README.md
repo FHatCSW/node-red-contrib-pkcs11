@@ -185,7 +185,7 @@ The enrollment workflow utilizes [node-red-contrib-ejbca](https://github.com/FHa
         "wires": [
             [
                 "6565e43c510ece1c",
-                "ca8a9d22dc1aa2c6"
+                "ad7da3cce58fed40"
             ]
         ]
     },
@@ -205,27 +205,6 @@ The enrollment workflow utilizes [node-red-contrib-ejbca](https://github.com/FHa
         "x": 670,
         "y": 180,
         "wires": []
-    },
-    {
-        "id": "ca8a9d22dc1aa2c6",
-        "type": "store-certificate",
-        "z": "6606d9de5049d44d",
-        "name": "",
-        "certificate_fieldType": "msg",
-        "certificate": "ejbca.enroll_pkcs10.certificate",
-        "outputDirectory_fieldType": "str",
-        "outputDirectory": "/Users/florianhandke/Downloads",
-        "fileName_fieldType": "str",
-        "fileName": "cert",
-        "outputFormat": "PEM",
-        "fileExtension": "cer",
-        "x": 420,
-        "y": 240,
-        "wires": [
-            [
-                "1976881b248836b2"
-            ]
-        ]
     },
     {
         "id": "1976881b248836b2",
@@ -264,6 +243,24 @@ The enrollment workflow utilizes [node-red-contrib-ejbca](https://github.com/FHa
             [
                 "0f9a13f86ac05612",
                 "0a97a5e70957471b"
+            ]
+        ]
+    },
+    {
+        "id": "ad7da3cce58fed40",
+        "type": "p11-store-cert",
+        "z": "6606d9de5049d44d",
+        "name": "",
+        "pkcs11Config": "35d840b7431fc17d",
+        "certificate_fieldType": "msg",
+        "certificate": "ejbca.enroll_pkcs10.certificate",
+        "certificateLabel_fieldType": "str",
+        "certificateLabel": "test_certificate_001",
+        "x": 400,
+        "y": 240,
+        "wires": [
+            [
+                "1976881b248836b2"
             ]
         ]
     },

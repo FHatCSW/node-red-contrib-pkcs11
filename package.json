@@ -22,7 +22,8 @@
       "sign": "lib/sign.js",
       "verify": "lib/verify.js",
       "hash": "lib/hash.js",
-      "list-objects": "lib/list-objects.js"
+      "list-objects": "lib/list-objects.js",
+      "store-cert": "lib/store-cert.js"
     }
   },
   "dependencies": {
