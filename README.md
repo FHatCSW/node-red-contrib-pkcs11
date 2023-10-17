@@ -513,7 +513,7 @@ our [Contributing Guidelines](/CONTRIBUTING.md).
 
 ## License
 
-This Node-RED EJBCA Integration Package is licensed under the [MIT License](/LICENSE).
+This Node-RED PKCS#11 Integration Package is licensed under the [MIT License](/LICENSE).
 
 ## Authors
 
