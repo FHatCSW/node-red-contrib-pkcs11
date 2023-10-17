@@ -1,0 +1,562 @@
+[
+    {
+        "id": "adeb25ea51a7a96f",
+        "type": "debug",
+        "z": "6606d9de5049d44d",
+        "name": "debug generate key pair",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "b17bcf7c52b3d9d2",
+        "type": "inject",
+        "z": "6606d9de5049d44d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "test",
+        "payloadType": "str",
+        "x": 230,
+        "y": 400,
+        "wires": [
+            [
+                "624e63a8c54cd163"
+            ]
+        ]
+    },
+    {
+        "id": "ae4ea1eed578c902",
+        "type": "debug",
+        "z": "6606d9de5049d44d",
+        "name": "debug hash",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "01f25b30993f9b31",
+        "type": "p11-generate-key-pair",
+        "z": "6606d9de5049d44d",
+        "name": "",
+        "pkcs11Config": "35d840b7431fc17d",
+        "keyType": "RSA",
+        "bitLength": "2048",
+        "curveType": "secp256r1",
+        "aesBitlength": "256",
+        "privateKeyLabel_fieldType": "str",
+        "privateKeyLabel": "rsa_private_key_10",
+        "publicKeyLabel_fieldType": "str",
+        "publicKeyLabel": "rsa_public_key_10",
+        "x": 430,
+        "y": 320,
+        "wires": [
+            [
+                "adeb25ea51a7a96f"
+            ]
+        ]
+    },
+    {
+        "id": "624e63a8c54cd163",
+        "type": "p11-digest",
+        "z": "6606d9de5049d44d",
+        "name": "",
+        "pkcs11Config": "35d840b7431fc17d",
+        "algorithm": "SHA1",
+        "payload_fieldType": "msg",
+        "payload": "payload",
+        "x": 390,
+        "y": 400,
+        "wires": [
+            [
+                "ae4ea1eed578c902"
+            ]
+        ]
+    },
+    {
+        "id": "b3c93bb20653583d",
+        "type": "inject",
+        "z": "6606d9de5049d44d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "test",
+        "payloadType": "str",
+        "x": 230,
+        "y": 480,
+        "wires": [
+            [
+                "f272a88e15682104"
+            ]
+        ]
+    },
+    {
+        "id": "9dbed7dc96f06819",
+        "type": "debug",
+        "z": "6606d9de5049d44d",
+        "name": "debug pkcs#11 info",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "f272a88e15682104",
+        "type": "p11-info",
+        "z": "6606d9de5049d44d",
+        "name": "",
+        "pkcs11Config": "35d840b7431fc17d",
+        "x": 430,
+        "y": 480,
+        "wires": [
+            [
+                "9dbed7dc96f06819"
+            ]
+        ]
+    },
+    {
+        "id": "37d6919a2a9e3c82",
+        "type": "inject",
+        "z": "6606d9de5049d44d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "test",
+        "payloadType": "str",
+        "x": 230,
+        "y": 560,
+        "wires": [
+            [
+                "56311796abf2b4cd"
+            ]
+        ]
+    },
+    {
+        "id": "8f1860f59e32048c",
+        "type": "debug",
+        "z": "6606d9de5049d44d",
+        "name": "debug list objects",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "8734394ab56dfa82",
+        "type": "p11-sign",
+        "z": "6606d9de5049d44d",
+        "name": "",
+        "pkcs11Config": "35d840b7431fc17d",
+        "signAlgo": "SHA256_RSA_PKCS",
+        "payload_fieldType": "msg",
+        "payload": "payload",
+        "privateKeyLabel_fieldType": "str",
+        "privateKeyLabel": "rsa_private_key_10",
+        "x": 390,
+        "y": 640,
+        "wires": [
+            [
+                "26d1305950102b1d",
+                "a553c8de345a2548"
+            ]
+        ]
+    },
+    {
+        "id": "9ca397a105c5e2e6",
+        "type": "inject",
+        "z": "6606d9de5049d44d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "test",
+        "payloadType": "str",
+        "x": 230,
+        "y": 640,
+        "wires": [
+            [
+                "8734394ab56dfa82"
+            ]
+        ]
+    },
+    {
+        "id": "26d1305950102b1d",
+        "type": "debug",
+        "z": "6606d9de5049d44d",
+        "name": "debug sign",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "a553c8de345a2548",
+        "type": "p11-verify",
+        "z": "6606d9de5049d44d",
+        "name": "",
+        "pkcs11Config": "35d840b7431fc17d",
+        "signAlgo": "SHA256_RSA_PKCS",
+        "payload_fieldType": "msg",
+        "payload": "payload",
+        "signature_fieldType": "msg",
+        "signature": "signature.buffer",
+        "publicKeyLabel_fieldType": "str",
+        "publicKeyLabel": "rsa_public_key_10",
+        "x": 400,
+        "y": 700,
+        "wires": [
+            [
+                "61ffe1fd48aae8f8"
+            ]
+        ]
+    },
+    {
+        "id": "61ffe1fd48aae8f8",
+        "type": "debug",
+        "z": "6606d9de5049d44d",
+        "name": "debug verify",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "cfa94814c2fa89f2",
+        "type": "configure-entity",
+        "z": "6606d9de5049d44d",
+        "name": "",
+        "ejbcaConfig": "4eedf14773d23515",
+        "CN": "test",
+        "O": "Campus Schwarzwald",
+        "OU": "Showcase Robot",
+        "C": "DE",
+        "L": "",
+        "ST": "",
+        "postalCode": "",
+        "streetAdress": "",
+        "serialNumber": "",
+        "emailAdress": "",
+        "givenName": "",
+        "surName": "",
+        "initials": "",
+        "title": "",
+        "description": "",
+        "ipAddress1": "",
+        "ipAddress2": "",
+        "ipAddress3": "",
+        "Uri1": "",
+        "Uri2": "",
+        "Uri3": "",
+        "Dns1": "",
+        "Dns2": "",
+        "Dns3": "",
+        "x": 420,
+        "y": 60,
+        "wires": [
+            [
+                "78b9ac55771e490b",
+                "7e141a8475731b4b"
+            ]
+        ]
+    },
+    {
+        "id": "41c14551f03af889",
+        "type": "inject",
+        "z": "6606d9de5049d44d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "test",
+        "payloadType": "str",
+        "x": 230,
+        "y": 320,
+        "wires": [
+            [
+                "01f25b30993f9b31"
+            ]
+        ]
+    },
+    {
+        "id": "0534fe27da275803",
+        "type": "inject",
+        "z": "6606d9de5049d44d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "test",
+        "payloadType": "str",
+        "x": 230,
+        "y": 60,
+        "wires": [
+            [
+                "cfa94814c2fa89f2"
+            ]
+        ]
+    },
+    {
+        "id": "78b9ac55771e490b",
+        "type": "debug",
+        "z": "6606d9de5049d44d",
+        "name": "debug configure entity",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "0a97a5e70957471b",
+        "type": "debug",
+        "z": "6606d9de5049d44d",
+        "name": "debug create csr",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "56311796abf2b4cd",
+        "type": "list-objects",
+        "z": "6606d9de5049d44d",
+        "name": "",
+        "pkcs11Config": "35d840b7431fc17d",
+        "x": 410,
+        "y": 560,
+        "wires": [
+            [
+                "8f1860f59e32048c"
+            ]
+        ]
+    },
+    {
+        "id": "0f9a13f86ac05612",
+        "type": "enroll-pkcs10",
+        "z": "6606d9de5049d44d",
+        "name": "",
+        "tls": "7f5a2ba045b1a9b1",
+        "ejbcaConfig": "4eedf14773d23515",
+        "username_fieldType": "str",
+        "username": "node_red_test_user_fhk",
+        "csrInfo_fieldType": "msg",
+        "csrInfo": "ejbca.csr",
+        "enrollment_code": "foo123",
+        "x": 420,
+        "y": 180,
+        "wires": [
+            [
+                "6565e43c510ece1c",
+                "ca8a9d22dc1aa2c6"
+            ]
+        ]
+    },
+    {
+        "id": "6565e43c510ece1c",
+        "type": "debug",
+        "z": "6606d9de5049d44d",
+        "name": "debug pkcs#10 request",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "ca8a9d22dc1aa2c6",
+        "type": "store-certificate",
+        "z": "6606d9de5049d44d",
+        "name": "",
+        "certificate_fieldType": "msg",
+        "certificate": "ejbca.enroll_pkcs10.certificate",
+        "outputDirectory_fieldType": "str",
+        "outputDirectory": "/Users/florianhandke/Downloads",
+        "fileName_fieldType": "str",
+        "fileName": "cert",
+        "outputFormat": "PEM",
+        "fileExtension": "cer",
+        "x": 420,
+        "y": 240,
+        "wires": [
+            [
+                "1976881b248836b2"
+            ]
+        ]
+    },
+    {
+        "id": "1976881b248836b2",
+        "type": "debug",
+        "z": "6606d9de5049d44d",
+        "name": "debug store certificate",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "7e141a8475731b4b",
+        "type": "p11-create-csr",
+        "z": "6606d9de5049d44d",
+        "name": "",
+        "pkcs11Config": "35d840b7431fc17d",
+        "subjectAltnames_fieldType": "msg",
+        "subjectAltnames": "ejbca.subject_alternative_names",
+        "subjects_fieldType": "msg",
+        "subjects": "ejbca.subjects",
+        "privateKeyLabel_fieldType": "str",
+        "privateKeyLabel": "rsa_private_key_10",
+        "publicKeyLabel_fieldType": "str",
+        "publicKeyLabel": "rsa_public_key_10",
+        "x": 410,
+        "y": 120,
+        "wires": [
+            [
+                "0f9a13f86ac05612",
+                "0a97a5e70957471b"
+            ]
+        ]
+    },
+    {
+        "id": "35d840b7431fc17d",
+        "type": "pkcs11-config",
+        "name": "softhsm_local",
+        "libraryPath": "/usr/local/lib/softhsm/libsofthsm2.so",
+        "slot": "0",
+        "password": "1234"
+    },
+    {
+        "id": "4eedf14773d23515",
+        "type": "ejbca-config-3",
+        "name": "KF-CS-ShowcaseRobot-MQTT-Client-EndEntity",
+        "ejbcaConf": "{\n    \"subjects\": [\n        {\n            \"property\": \"CN\",\n            \"prop_value\": \"\",\n            \"prop_required\": true,\n            \"prop_modifiable\": true\n        },\n        {\n            \"property\": \"O\",\n            \"prop_value\": \"Campus Schwarzwald\",\n            \"prop_required\": true,\n            \"prop_modifiable\": false\n        },\n        {\n            \"property\": \"OU\",\n            \"prop_value\": \"Showcase Robot\",\n            \"prop_required\": true,\n            \"prop_modifiable\": false\n        },\n        {\n            \"property\": \"C\",\n            \"prop_value\": \"DE\",\n            \"prop_required\": true,\n            \"prop_modifiable\": false\n        }\n    ],\n    \"subject_alternative_names\": [],\n    \"profile\": {\n        \"hostname\": \"campuspki.germanywestcentral.cloudapp.azure.com\",\n        \"certificate_profile_name\": \"KF-CS-ShowcaseRobot-MQTT-CertProfile\",\n        \"end_entity_profile_name\": \"KF-CS-ShowcaseRobot-MQTT-Client-EndEntity\",\n        \"certificate_authority_name\": \"KS-CS-ShowcaseRobot-MQTT-CA\",\n        \"username\": {\n            \"value\": \"\",\n            \"auto_generated\": false\n        },\n        \"enrollment_code\": {\n            \"required\": true,\n            \"auto_generated\": false,\n            \"minimum_bits\": 0\n        },\n        \"mail\": {\n            \"use\": true,\n            \"required\": false,\n            \"modifiable\": false\n        }\n    }\n}"
+    },
+    {
+        "id": "7f5a2ba045b1a9b1",
+        "type": "tls-config",
+        "name": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "NodeRedRestAdmin001.cert.pem",
+        "keyname": "NodeRedRestAdmin001.key.pem",
+        "caname": "ca-chain.cert.pem",
+        "servername": "",
+        "verifyservercert": true,
+        "alpnprotocol": ""
+    }
+]

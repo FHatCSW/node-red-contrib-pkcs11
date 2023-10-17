@@ -9,13 +9,23 @@
                 value: "",
                 required: true
             },
-            algorithm: { value: "sha1" } // Default algorithm
+            algorithm: { value: "sha1" },
+            payload_fieldType: {value:"msg"},
+            payload: {value: "payload", required: true},
         },
         inputs: 1,
         outputs: 1,
+        icon: "icons/10-hashtag-solid.svg",
         label: function () {
             return this.name || "hash";
         },
+        oneditprepare: function () {
+                                                $("#node-input-payload").typedInput({
+                default: 'msg',
+                types: ['msg', 'global', 'flow', 'str'],
+                typeField: $("#node-input-payload_fieldType")
+            });
+        }
     });
 </script>
 
@@ -26,7 +36,7 @@
     </div>
      <div class="form-row">
         <label for="node-input-pkcs11Config">
-            <i class="fa fa-tag"></i> PKCS#11 Configuration
+            <i class="fa fa-gear"></i> PKCS#11 Configuration
         </label>
         <input type="text" style="width: 300px" id="node-input-pkcs11Config">
     </div>
@@ -38,5 +48,11 @@
             <option value="SHA512">SHA-512</option>
             <!-- Add more supported algorithms here -->
         </select>
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-payload"><i class="fa fa-message"></i> Payload</label>
+        <input type="text" id="node-input-payload" style="width:250px;">
+        <input type="hidden" id="node-input-payload_fieldType">
     </div>
 </script>

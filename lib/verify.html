@@ -9,20 +9,42 @@
                 value: "",
                 required: true
             },
-            keyLabel: {
-                value: "Your_Public_Key_Label",
-                required: true
-            },
             signAlgo: {
                 value: "SHA1_RSA_PKCS",
                 required: true
-            }
+            },
+            payload_fieldType: {value: "msg"},
+            payload: {value: "payload", required: true},
+            signature_fieldType: {value: "msg"},
+            signature: {value: "signature.buffer", required: true},
+            publicKeyLabel_fieldType: {value: "str"},
+            publicKeyLabel: {value: "public_key", required: true},
         },
         inputs: 1,
         outputs: 1,
+        icon: "icons/9-check-solid.svg",
         label: function () {
             return this.name || "p11-verify";
         },
+        oneditprepare: function () {
+            $("#node-input-publicKeyLabel").typedInput({
+                default: 'msg',
+                types: ['msg', 'global', 'flow', 'str'],
+                typeField: $("#node-input-publicKeyLabel_fieldType")
+            });
+
+            $("#node-input-payload").typedInput({
+                default: 'msg',
+                types: ['msg', 'global', 'flow', 'str'],
+                typeField: $("#node-input-payload_fieldType")
+            });
+
+            $("#node-input-signature").typedInput({
+                default: 'msg',
+                types: ['msg', 'global', 'flow', 'str'],
+                typeField: $("#node-input-signature_fieldType")
+            });
+        }
     });
 </script>
 
@@ -33,14 +55,11 @@
     </div>
     <div class="form-row">
         <label for="node-input-pkcs11Config">
-            <i class="fa fa-tag"></i> PKCS#11 Configuration
+            <i class="fa fa-gear"></i> PKCS#11 Configuration
         </label>
         <input type="text" style="width: 300px" id="node-input-pkcs11Config">
     </div>
-    <div class="form-row">
-        <label for="node-input-keyLabel"><i class="fa fa-tag"></i> Public Key Label</label>
-        <input type="text" id="node-input-keyLabel" placeholder="Your_Public_Key_Label">
-    </div>
+
     <div class="form-row">
         <label for="node-input-signAlgo"><i class="fa fa-key"></i> Signing Algorithm</label>
         <select id="node-input-signAlgo">
@@ -54,5 +73,23 @@
             <option value="ECDSA_SHA384">ECDSA_SHA384</option>
             <option value="ECDSA_SHA512">ECDSA_SHA512</option>
         </select>
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-payload"><i class="fa fa-message"></i> Payload</label>
+        <input type="text" id="node-input-payload" style="width:250px;">
+        <input type="hidden" id="node-input-payload_fieldType">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-signature"><i class="fa fa-signature"></i> Signature</label>
+        <input type="text" id="node-input-signature" style="width:250px;">
+        <input type="hidden" id="node-input-signature_fieldType">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-publicKeyLabel"><i class="fa fa-tag"></i> Public Key Label</label>
+        <input type="text" id="node-input-publicKeyLabel" style="width:250px;">
+        <input type="hidden" id="node-input-publicKeyLabel_fieldType">
     </div>
 </script>

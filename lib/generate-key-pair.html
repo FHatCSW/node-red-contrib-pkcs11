@@ -13,16 +13,31 @@
             bitLength: { value: "2048" }, // Default RSA bit length
             curveType: { value: "secp256r1" }, // Default ECC curve type
             aesBitlength: {value: "256"},
-            publickeylabel: { value: "RSA_Public_Key" },
-            privatekeylabel: { value: "RSA_Private_Key" },
+            privateKeyLabel_fieldType: {value:"str"},
+            privateKeyLabel: {value: "private_key", required: true},
+            publicKeyLabel_fieldType: {value:"str"},
+            publicKeyLabel: {value: "public_key", required: true},
         },
         inputs: 1,
         outputs: 1,
+        icon: "icons/0-key-solid.svg",
         label: function () {
             return this.name || "generate-key-pair";
         },
         oneditprepare: function () {
             var node = this;
+
+                                    $("#node-input-privateKeyLabel").typedInput({
+                default: 'msg',
+                types: ['msg', 'global', 'flow', 'str'],
+                typeField: $("#node-input-privateKeyLabel_fieldType")
+            });
+
+            $("#node-input-publicKeyLabel").typedInput({
+                default: 'msg',
+                types: ['msg', 'global', 'flow', 'str'],
+                typeField: $("#node-input-publicKeyLabel_fieldType")
+            });
 
             // Show or hide bit length and curve type options based on key type
             var keyTypeSelect = $("#node-input-keyType");
@@ -65,17 +80,20 @@
     </div>
     <div class="form-row">
         <label for="node-input-pkcs11Config">
-            <i class="fa fa-tag"></i> PKCS#11 Configuration
+            <i class="fa fa-gear"></i> PKCS#11 Configuration
         </label>
         <input type="text" style="width: 300px" id="node-input-pkcs11Config">
     </div>
-    <div class="form-row node-input-publickeylabel-row">
-        <label for="node-input-publickeylabel"><i class="fa fa-tag"></i> Public-Key Label</label>
-        <input type="text" id="node-input-publickeylabel" placeholder="Public_Key">
+    <div class="form-row">
+        <label for="node-input-privateKeyLabel"><i class="fa fa-tag"></i> Private Key Label</label>
+        <input type="text" id="node-input-privateKeyLabel" style="width:250px;">
+        <input type="hidden" id="node-input-privateKeyLabel_fieldType">
     </div>
-    <div class="form-row node-input-privatekeylabel-row">
-        <label for="node-input-privatekeylabel"><i class="fa fa-tag"></i> Private-Key Label</label>
-        <input type="text" id="node-input-privatekeylabel" placeholder="Private_Key">
+
+    <div class="form-row">
+        <label for="node-input-publicKeyLabel"><i class="fa fa-tag"></i> Public Key Label</label>
+        <input type="text" id="node-input-publicKeyLabel" style="width:250px;">
+        <input type="hidden" id="node-input-publicKeyLabel_fieldType">
     </div>
     <div class="form-row">
         <label for="node-input-keyType"><i class="fa fa-key"></i> Key Type</label>

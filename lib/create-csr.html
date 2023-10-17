@@ -9,16 +9,47 @@
                 value: "",
                 required: true
             },
-            keyLabel: { value: "Your_Private_Key_Label",
-            required: true },
-            pubkeyLabel: { value: "Your_Public_Key_Label",
-            required: true }
+            subjectAltnames_fieldType: {value: "msg"},
+            subjectAltnames: {value: "ejbca.subject_alternative_names", required: true},
+            subjects_fieldType: {value: "msg"},
+            subjects: {value: "ejbca.subjects", required: true},
+            privateKeyLabel_fieldType: {value:"str"},
+            privateKeyLabel: {value: "private_key", required: true},
+            publicKeyLabel_fieldType: {value:"str"},
+            publicKeyLabel: {value: "public_key", required: true},
+
         },
         inputs: 1,
         outputs: 1,
+        icon: "icons/6-signature-solid.svg",
         label: function () {
             return this.name || "create-csr";
         },
+        oneditprepare: function () {
+                                    $("#node-input-subjectAltnames").typedInput({
+                default: 'msg',
+                types: ['msg', 'global', 'flow'],
+                typeField: $("#node-input-subjectAltnames_fieldType")
+            });
+
+            $("#node-input-subjects").typedInput({
+                default: 'msg',
+                types: ['msg', 'global', 'flow'],
+                typeField: $("#node-input-subjects_fieldType")
+            });
+
+                        $("#node-input-privateKeyLabel").typedInput({
+                default: 'msg',
+                types: ['msg', 'global', 'flow', 'str'],
+                typeField: $("#node-input-privateKeyLabel_fieldType")
+            });
+
+            $("#node-input-publicKeyLabel").typedInput({
+                default: 'msg',
+                types: ['msg', 'global', 'flow', 'str'],
+                typeField: $("#node-input-publicKeyLabel_fieldType")
+            });
+        }
     });
 </script>
 
@@ -29,16 +60,33 @@
     </div>
     <div class="form-row">
         <label for="node-input-pkcs11Config">
-            <i class="fa fa-tag"></i> PKCS#11 Configuration
+            <i class="fa fa-gear"></i> PKCS#11 Configuration
         </label>
         <input type="text" style="width: 300px" id="node-input-pkcs11Config">
     </div>
+
     <div class="form-row">
-        <label for="node-input-keyLabel"><i class="fa fa-tag"></i> Private Key Label</label>
-        <input type="text" id="node-input-keyLabel" placeholder="Your_Private_Key_Label">
+        <label for="node-input-subjects"><i class="fa fa-folder"></i> Subjects</label>
+        <input type="text" id="node-input-subjects" style="width:250px;">
+        <input type="hidden" id="node-input-subjects_fieldType">
     </div>
+
     <div class="form-row">
-        <label for="node-input-pubkeyLabel"><i class="fa fa-tag"></i> Public Key Label</label>
-        <input type="text" id="node-input-pubkeyLabel" placeholder="Your_Public_Key_Label">
+        <label for="node-input-subjectAltnames"><i class="fa fa-folder"></i> Subject Alt. Name </label>
+        <input type="text" id="node-input-subjectAltnames" style="width:250px;">
+        <input type="hidden" id="node-input-subjectAltnames_fieldType">
     </div>
+
+    <div class="form-row">
+        <label for="node-input-privateKeyLabel"><i class="fa fa-tag"></i> Private Key Label</label>
+        <input type="text" id="node-input-privateKeyLabel" style="width:250px;">
+        <input type="hidden" id="node-input-privateKeyLabel_fieldType">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-publicKeyLabel"><i class="fa fa-tag"></i> Public Key Label</label>
+        <input type="text" id="node-input-publicKeyLabel" style="width:250px;">
+        <input type="hidden" id="node-input-publicKeyLabel_fieldType">
+    </div>
+
 </script>
