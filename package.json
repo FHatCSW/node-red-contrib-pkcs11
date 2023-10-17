@@ -2,6 +2,15 @@
   "name": "node-red-contrib-pkcs11",
   "version": "1.0.3",
   "description": "Node-RED Nodes for a PKCS11 interface with an HSM",
+  "keywords": ["node-red"],
+  "homepage": "https://github.com/FHatCSW/node-red-contrib-pkcs11",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FHatCSW/node-red-contrib-pkcs11"
+  },
+  "bugs": {
+    "url": "https://github.com/FHatCSW/node-red-contrib-pkcs11/issues"
+  },
   "node-red": {
     "nodes": {
       "generate-keypair": "lib/generate-key-pair.js",
@@ -14,17 +23,24 @@
       "list-objects": "lib/list-objects.js"
     }
   },
-  "author": "Florian Handke",
-  "license": "MIT",
   "dependencies": {
     "graphene-pk11": "^2.3.2",
     "node-forge": "^1.3.1"
   },
-  "main": "index.js",
-  "directories": {
-    "lib": "lib"
+  "author": {
+    "name": "Florian Handke",
+    "email": "florian.handke@campus-schwarzwald.de",
+    "url": "https://github.com/FHatCSW"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  }
+  "contributors": [
+    {
+      "name": "Alexander Harig",
+      "email": "alexander.harig@campus-schwarzwald.de",
+      "url": "https://github.com/AlexCampusSchwarzwald"
+    }
+  ],
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "license": "MIT"
 }
