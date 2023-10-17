@@ -1,8 +1,10 @@
 {
   "name": "node-red-contrib-pkcs11",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "Node-RED Nodes for a PKCS11 interface with an HSM",
-  "keywords": ["node-red"],
+  "keywords": [
+    "node-red"
+  ],
   "homepage": "https://github.com/FHatCSW/node-red-contrib-pkcs11",
   "repository": {
     "type": "git",
